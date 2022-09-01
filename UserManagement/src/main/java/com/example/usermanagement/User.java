@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -17,19 +18,25 @@ public class User{
     @Column(name = "uuid")
     private UUID id;
     @Column(name = "firstName")
+    @NotNull
     private String firstName;
     @Column(name = "lastName")
+    @NotNull
     private String lastName;
     @Column(name = "age")
+    @NotNull
     private int age;
     @Column(name = "username")
+    @NotNull
     private String username;
     @Column(name = "password")
+    @NotNull
     private String password;
     @Column(name = "roles")
     private Set<Role> roles;
     @Column(name = "created")
-    private LocalDateTime created;
+    @NotNull
+    private final LocalDateTime created;
     @Column(name = "updated")
     private LocalDateTime updated;
     @Column(name = "deleted")
@@ -42,6 +49,8 @@ public class User{
         this.username = username;
         this.password = password;
         this.roles = roles;
+        this.created = LocalDateTime.now();
+        this.updated = LocalDateTime.now();
     }
 
     public User(String firstName, String lastName, int age, String username, String password) {
@@ -50,6 +59,8 @@ public class User{
         this.age = age;
         this.username = username;
         this.password = password;
+        this.created = LocalDateTime.now();
+        this.updated = LocalDateTime.now();
     }
 
     public UUID getId() {
@@ -61,6 +72,7 @@ public class User{
     }
 
     public void setFirstName(String firstName) {
+        this.updated = LocalDateTime.now();
         this.firstName = firstName;
     }
 
@@ -77,6 +89,7 @@ public class User{
     }
 
     public void setAge(int age) {
+        this.updated = LocalDateTime.now();
         this.age = age;
     }
 
@@ -85,6 +98,7 @@ public class User{
     }
 
     public void setUsername(String username) {
+        this.updated = LocalDateTime.now();
         this.username = username;
     }
 
@@ -93,6 +107,7 @@ public class User{
     }
 
     public void setPassword(String password) {
+        this.updated = LocalDateTime.now();
         this.password = password;
     }
 
@@ -103,44 +118,41 @@ public class User{
     public LocalDateTime getCreated() {
         return created;
     }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
     public LocalDateTime getUpdated() {
         return updated;
     }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
     public LocalDateTime getDeleted() {
         return deleted;
     }
-
-    public void setDeleted(LocalDateTime deleted) {
-        this.deleted = deleted;
-    }
-
     public void setRoles(Set<Role> roles) {
+        this.updated = LocalDateTime.now();
         this.roles = roles;
     }
 
     public void addRoles(Role role){
+        this.updated = LocalDateTime.now();
         this.roles.add(role);
     }
 
     public void addRoles(Collection<Role> roles){
+        this.updated = LocalDateTime.now();
         this.roles.addAll(roles);
     }
 
     public void removeRoles(Role role){
+        this.updated = LocalDateTime.now();
         this.roles.remove(role);
     }
 
     public void removeRoles(Collection<Role> roles){
+        this.updated = LocalDateTime.now();
         this.roles.removeAll(roles);
+    }
+
+    public void deleteUser(){
+        if (this.deleted == null){
+            this.updated = LocalDateTime.now();
+            this.deleted = LocalDateTime.now();
+        }
     }
 }

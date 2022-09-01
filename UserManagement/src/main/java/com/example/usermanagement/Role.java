@@ -12,17 +12,19 @@ public class Role{
     private UUID id;
     private String name;
     private Set<Permission> permissions;
-    private LocalDateTime created;
+    private final LocalDateTime created;
     private LocalDateTime updated;
     private LocalDateTime deleted;
 
     public Role(String name, Set<Permission> permissions) {
         this.name = name;
         this.permissions = permissions;
+        this.created = LocalDateTime.now();
     }
     public Role(String name, Permission permissions) {
         this.name = name;
         this.permissions = Set.of(permissions);
+        this.created = LocalDateTime.now();
     }
 
     public UUID getId() {
@@ -45,26 +47,13 @@ public class Role{
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
     public LocalDateTime getUpdated() {
         return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
     }
 
     public LocalDateTime getDeleted() {
         return deleted;
     }
-
-    public void setDeleted(LocalDateTime deleted) {
-        this.deleted = deleted;
-    }
-
     public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
@@ -82,5 +71,11 @@ public class Role{
     }
     public void removePermissions(Collection<Permission> permissions){
         this.permissions.removeAll(permissions);
+    }
+    public void deleteRole(){
+        if (this.deleted == null){
+            this.updated = LocalDateTime.now();
+            this.deleted = LocalDateTime.now();
+        }
     }
 }
