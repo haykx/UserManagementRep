@@ -2,9 +2,11 @@ package com.example.usermanagement;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
-import jakarta.ws.rs.core.Response;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @ApplicationPath("/api")
+@Produces(MediaType.APPLICATION_JSON)
 public class HelloApplication extends Application {
 
     public static void main(String[] args) {

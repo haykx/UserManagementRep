@@ -1,10 +1,8 @@
 package com.example.usermanagement;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.naming.Name;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -13,9 +11,11 @@ import java.util.UUID;
 
 @Entity(name = "user")
 @Table(name = "user")
+@JsonbPropertyOrder({"uuid", "firstName", "lastName", "age", "username", "password", "created", "updated", "deleted"})
 public class User{
     @Id
     @Column(name = "uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(name = "firstName")
     @NotNull
