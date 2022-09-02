@@ -10,8 +10,10 @@ import javax.ws.rs.core.MediaType;
 public class HelloApplication extends Application {
 
     public static void main(String[] args) {
-        User user = new User("name", "lastName", 25,"username", "password");
 
-        System.out.println(user.getCreated());
+        System.out.println(HelloResource.hello());
+//        User user = new User("name", "lastName", 25,"username", "password");
+//
+//        System.out.println(user.getCreated());
     }
 }

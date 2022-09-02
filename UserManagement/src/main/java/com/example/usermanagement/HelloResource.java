@@ -3,14 +3,14 @@ package com.example.usermanagement;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 
-
-@Path("/hello-world")
+@Path("/hello")
 public class HelloResource {
     @GET
-    @Produces("text/plain")
-    public String hello() {
-        return "Hello, World!";
+    @Produces(MediaType.TEXT_HTML)
+    public static String hello() {
+        return "<!DOCTYPE HTML><html><body><h1>Hello, World!</h1></body></html>";
     }
 }
