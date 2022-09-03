@@ -11,4 +11,4 @@ services:
     volumes:
       - data:/var/lib/postgresql
   myapp:
-    image: usermanagement_postgres_1
+    image: usermanagement_postgres
