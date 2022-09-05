@@ -161,4 +161,37 @@ public class User{
             this.deleted = LocalDateTime.now();
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if(getId().equals(user.getId())) return true;
+        if (getAge() != user.getAge()) return false;
+        if (!getFirstName().equals(user.getFirstName())) return false;
+        if (!getLastName().equals(user.getLastName())) return false;
+        if (!getUsername().equals(user.getUsername())) return false;
+        if (!getPassword().equals(user.getPassword())) return false;
+        if (getRoles() != null ? !getRoles().equals(user.getRoles()) : user.getRoles() != null) return false;
+        if (!getCreated().equals(user.getCreated())) return false;
+        if (!getUpdated().equals(user.getUpdated())) return false;
+        return getDeleted() != null ? getDeleted().equals(user.getDeleted()) : user.getDeleted() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getAge();
+        result = 31 * result + getUsername().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
+        result = 31 * result + getCreated().hashCode();
+        result = 31 * result + getUpdated().hashCode();
+        result = 31 * result + (getDeleted() != null ? getDeleted().hashCode() : 0);
+        return result;
+    }
 }

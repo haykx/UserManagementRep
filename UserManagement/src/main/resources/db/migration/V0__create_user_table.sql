@@ -1,6 +1,6 @@
 create table "user"
 (
-    uuid serial primary key not null ,
+    uuid bigserial primary key not null ,
     firstName varchar(50) not null ,
     lastName varchar(50) not null ,
     age integer not null ,
